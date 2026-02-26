@@ -1,0 +1,68 @@
+{{ block scripts }}
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+{{ endblock }}
+
+{{ block style }}
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        .table {
+            width: 100%; /* Optional: Ensures the table takes the full width */
+            border-collapse: collapse; /* Ensures there are no gaps between table cells */
+        }
+        .table th, .table td {
+            text-align: center; /* Centers content horizontally in all cells */
+            vertical-align: middle; /* Centers content vertically */
+            padding: 8px; /* Adds some padding to the cells for better spacing */
+        }
+        .table th:first-child, /* Targets the first <th> in each row */
+        .table td:first-child { /* Targets the first <td> in each row */
+            text-align: right; /* Right-aligns content in the leftmost column */
+        }
+        .table th {
+            background-color: #f2f2f2; /* Optional: Adds a background color to header cells */
+        }
+        .logo-right {
+            display: block; /* Ensures it appears on its own line */
+            margin-left: auto; /* Pushes the image to the right */
+            margin-right: 0; /* Optional, ensures no extra space on the right */
+            width: 25%; /* Adjust to make it dynamic; use percentages for responsiveness */
+            max-width: 150px; /* Optional: Limits the maximum size */
+            height: auto; /* Maintains aspect ratio */
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 9/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>สถานการณ์ในจังหวัดชายแดนภาคใต้</b>
+    </h3>
+
+    <h5>
+        {{ formfields }}
+    </h5>
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+{{ endblock }}
+
+{{ block options }}
+    </html>
+{{ endblock }}

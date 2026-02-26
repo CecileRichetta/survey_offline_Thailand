@@ -1,0 +1,55 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+    </style>
+
+{{ endblock }}
+
+    {{ block content }}
+    <h2>ข้อมูลสำหรับการจ่ายค่าตอบแทนการเข้าร่วมกิจกรรม</h2>
+
+    {{ if total_records > 0 }}
+        <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+            <thead>
+                <tr>
+                    <th>รหัสผู้ตอบแบบสอบถาม</th>
+                    <th>วันสัมภาษณ์ครั้งสุดท้าย</th>
+                    <th>ค่าตอบแทนสำหรับการตอบแบบสอบถาม</th>
+                    <th>ผลลัพธ์ของกิจกรรม</th>
+                    <th>ยอดชำระทั้งหมด</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in csv_data %}
+                    <tr>
+                        <td>{{ row.participant_label }}</td>
+                        <td>{{ row.date_interview }}</td>
+                        <td>{{ row.participation_fee }} </td>
+                        <td>{{ row.payoff_games }}</td>
+                        <td>{{ row.total_compensation }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>ยอดรวมผู้ตอบแบบสอบถาม : {{ total_records }}</p>
+    {{ else }}
+        <p>ไม่มีข้อมูล</p>
+    {{ endif }}
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

@@ -1,0 +1,104 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const toggles = [
+              { buttonId: 'toggle-proposer-btn', contentId: 'instructions-ultimatum-proposer' },
+              { buttonId: 'toggle-receiver-btn', contentId: 'instructions-ultimatum-receiver' }
+          ];
+
+          toggles.forEach(({ buttonId, contentId }) => {
+              const btn = document.getElementById(buttonId);
+              const content = document.getElementById(contentId);
+
+              if (btn && content) {
+                  btn.addEventListener('click', () => {
+                      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+                  });
+                  // Initialize hidden
+                  content.style.display = 'none';
+              }
+          });
+      });
+    </script>
+{{ endblock }}
+
+{{ block styles}}
+<style>
+    .progress-text {
+        text-align: right;
+        color: grey;
+        font-size: 11px;
+        width: 100%;
+    }
+</style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 5/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b> ผลลัพธ์จากกิจกรรมที่ 1</b>
+    </h3>
+<h5>
+    {{ if participant.vars.side_ultimatum == 0}}
+
+    <p>
+        ในกิจกรรมแรก คุณได้เสนอ {{ participant.vars.decision_UG }} เหรียญให้กับคู่ของท่าน <br>
+        คุณถูกจับคู่กับอีกคนหนึ่งซึ่งบอกว่าจะยอมรับเหรียญจากอีกฝ่ายหนึ่งไม่น้อยกว่า {{ participant.vars.other_UG_decision }} เหรียญ <br>
+        ดังนั้น ตามคำแนะนำของกิจกรรมนี้ ผลตอบแทนของท่านสำหรับกิจกรรมแรกคือ {{ participant.vars.payoff_UG }} เหรียญ <br>
+   </p>
+
+        <!-- For Ultimatum Game Instructions -->
+    <button type="button" class="btn btn-outline-primary" id="toggle-proposer-btn">
+      แสดง / ซ่อนคำแนะนำสำหรับกิจกรรมแรก
+    </button>
+    <div id="instructions-ultimatum-proposer">
+        {{ include C.TEMPLATE_INSTRUCTIONS_ULTIMATUM_PROPOSER }}
+    </div>
+
+
+    {{ elif participant.vars.side_ultimatum == 1}}
+
+    <p>
+        ในกิจกรรมแรก ท่านบอกว่าท่านต้องการเหรียญอย่างน้อย {{ participant.vars.decision_UG }} เหรียญจากคู่ของท่าน <br>
+        ท่านถูกจับคู่กับผู้ที่บอกว่าจะให้เหรียญจำนวน {{ participant.vars.other_UG_decision }} เหรียญ <br>
+        ดังนั้น ตามคำแนะนำของกิจกรรมนี้ ผลตอบแทนสุดท้ายของท่านสำหรับกิจกรรมแรกคือ {{ participant.vars.payoff_UG }} เหรียญ <br>
+   </p>
+
+    <!-- For Ultimatum Game Instructions -->
+<button type="button" class="btn btn-outline-primary" id="toggle-receiver-btn">
+  แสดง / ซ่อนคำแนะนำสำหรับกิจกรรมแรก
+</button>
+<div id="instructions-ultimatum-receiver">
+    {{ include C.TEMPLATE_INSTRUCTIONS_ULTIMATUM_RESPONDER }}
+</div>
+
+
+
+    {{ endif}}
+</h5>
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+{{ endblock }}
+
+{{ block options }}
+<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</html>
+{{ endblock }}

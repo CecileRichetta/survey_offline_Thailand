@@ -1,0 +1,50 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 10/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>ขอบคุณสำหรับการเข้าร่วมการสำรวจความคิดเห็น</b>
+    </h3>
+
+
+    <h5>
+        <p class="text-center">
+        ค่าตอบแทนผู้ตอบแบบสอบถาม: {{ participant.vars.participation_fee }}  บาท <br><br>
+        สำหรับการชำระค่าตอบแทนที่ได้จากกิจกรรม  เราจะกลับมาอีกครั้งในวันพรุ่งนี้ <br><br>
+            {{ if  session.config.name == "session_C4P_THAI_w1" }}
+                {{ if not participant.vars.dropout }}
+                    <b>สำหรับผู้เก็บข้อมูลเท่านั้น:</b> หากผู้ตอบแบบสอบถามประสงค์ให้ติดต่อกลับ โปรดเก็บหมายเลขโทรศัพท์และชื่อแยกจากแบบสอบถาม โดยเขียนข้อมูลไว้หลังรหัสผู้ตอบแบบสอบถาม <br><br>
+                {{ endif }}
+            {{ endif }}
+        <button class="btn btn-primary">
+            ส่งแบบสอบถาม
+        </button>
+        </p>
+    </h5>
+
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

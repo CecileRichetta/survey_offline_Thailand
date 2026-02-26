@@ -1,0 +1,44 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 5/10
+        </p>
+    {{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b> กิจกรรมถัดไป</b>
+    </h3>
+    <h5>
+     <p class="mb-4">
+      ในส่วนนี้เราจะขอให้ท่านตัดสินใจสองเรื่องในสองสถานการณ์ที่แตกต่างกัน แต่ละสถานการณ์จะสะท้อนถึงปฏิสัมพันธ์ระหว่างท่านกับผู้เข้าร่วมอีกคนหนึ่งซึ่งท่านไม่ทราบชื่อและมีเหรียญอยู่ในมือเช่นกัน โดยแต่ละเหรียญที่ท่านได้รับในช่วงท้ายของกิจกรรมจะถูกแปลงเป็นเงินบาทและมอบให้ท่านหลังจากจบการสำรวจความคิดเห็นในครั้งนี้ ในทำนองเดียวกัน คู่ของท่านจะได้รับเหรียญที่จะถูกแปลงเป็นเงินบาทด้วยเช่นกัน ทั้งนี้ เราจะเก็บข้อมูลส่วนบุคคลของท่านและผู้เข้าร่วมอีกคนหนึ่งเป็นความลับสูงสุด    </h5>
+
+
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

@@ -1,0 +1,79 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (e) => {
+            const instructions = document.getElementById('instructions-pg'),
+                btnToggle = document.getElementById('toggle-instructions-btn');
+
+            let displayed = false;
+
+            const toggling = () => {
+                if (displayed) {
+                    instructions.style.display = 'none';
+                    displayed = false;
+                } else {
+                    instructions.style.display = 'block';
+                    displayed = true;
+                }
+            }
+
+            btnToggle.addEventListener('click', toggling);
+        })
+    </script>
+{{ endblock }}
+
+{{ block styles}}
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        #instructions-pg {
+            display: none;
+            padding: 10px; /* Optional: Add some padding for better readability */
+            color: black; /* Optional: Change text color to black for contrast */
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 6/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b> ผลลัพธ์สำหรับกิจกรรมที่สอง </b>
+    </h3>
+<h5>
+<p>
+    ในกิจกรรมที่สอง ท่านสมทบ  {{ participant.vars.decision_PG }} เหรียญลงในกระปุกกลางและเก็บ {{ player.tokens_kept }} เหรียญไว้เอง <br>
+    คู่ของท่านได้ร่วมสมทบ {{ participant.vars.other_PG_decision }} เหรียญลงในกระปุกกลาง <br>
+    ดังนั้น ผลตอบแทนสุดท้ายของท่านสำหรับกิจกรรมที่ 2 คือ {{ participant.vars.payoff_PG }} เหรียญ <br>
+</p>
+<p>
+    <button type="button" class="btn btn-outline-primary" id="toggle-instructions-btn">
+        โปรดคลิกที่ แสดง/ซ่อนคำแนะนำ
+    </button>
+    {{ include C.TEMPLATE_INSTRUCTIONS_PG }}
+</p>
+
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

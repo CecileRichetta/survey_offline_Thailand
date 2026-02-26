@@ -1,0 +1,147 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+            .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 3/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>ข้อมูลทั่วไป</b>
+    </h3>
+    <body>
+<h5>
+        {{ formfields }}
+</h5>
+<script>
+    // Polyfill for closest() for older browsers
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(s) {
+            var el = this;
+            do {
+                if (el.matches && el.matches(s)) return el;
+                el = el.parentElement || el.parentNode;
+            } while (el !== null && el.nodeType === 1);
+            return null;
+        };
+    }
+
+    // Polyfill for matches() for older browsers
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+
+    // Function to find and hide field by label text
+    function hideFieldByLabel(fieldName, labelTextPart) {
+        var labels = document.querySelectorAll('label');
+        for (var i = 0; i < labels.length; i++) {
+            var label = labels[i];
+            if (label.textContent.indexOf(labelTextPart) !== -1) {
+                var container = label.closest('div, tr, p');
+                if (!container) container = label.parentElement;
+                var attempts = 0;
+                while (container && container !== document.body && attempts < 10) {
+                    var field = container.querySelector('input[name="' + fieldName + '"], select[name="' + fieldName + '"]');
+                    if (field) {
+                        container.style.display = 'none';
+                        container.setAttribute('data-conditional-field', fieldName);
+                        break;
+                    }
+                    container = container.parentElement;
+                    attempts++;
+                }
+                if (container && container.getAttribute('data-conditional-field')) break;
+            }
+        }
+    }
+
+    // Function to toggle second deployment fields
+    function toggleSecondDeploymentFields() {
+        var deploymentRadios = document.querySelectorAll('input[name="deployment_second"]');
+        var provinceContainer = document.querySelector('[data-conditional-field="military_province_second"]');
+        var yearContainer = document.querySelector('[data-conditional-field="seconddeployment_start_year"]');
+        var monthContainer = document.querySelector('[data-conditional-field="seconddeployment_start_month"]');
+        var lengthContainer = document.querySelector('[data-conditional-field="seconddeployment_length"]');
+
+        if (!provinceContainer || !yearContainer || !monthContainer || !lengthContainer) {
+            return;
+        }
+
+        // Check initial state - only show if deployment_second == 1
+        var selectedRadio = document.querySelector('input[name="deployment_second"]:checked');
+        if (selectedRadio && selectedRadio.value === '1') {
+            provinceContainer.style.display = '';
+            yearContainer.style.display = '';
+            monthContainer.style.display = '';
+            lengthContainer.style.display = '';
+        } else {
+            // Hide for any other value (0, 999, or no selection)
+            provinceContainer.style.display = 'none';
+            yearContainer.style.display = 'none';
+            monthContainer.style.display = 'none';
+            lengthContainer.style.display = 'none';
+        }
+
+        // Add event listeners
+        for (var i = 0; i < deploymentRadios.length; i++) {
+            deploymentRadios[i].addEventListener('change', function() {
+                if (this.value === '1') {
+                    // Show only when value is exactly '1'
+                    provinceContainer.style.display = '';
+                    yearContainer.style.display = '';
+                    monthContainer.style.display = '';
+                    lengthContainer.style.display = '';
+                } else {
+                    // Hide for any other value (0, 999, etc.)
+                    provinceContainer.style.display = 'none';
+                    yearContainer.style.display = 'none';
+                    monthContainer.style.display = 'none';
+                    lengthContainer.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    // First hide the conditional fields by label and mark them (hidden by default)
+    hideFieldByLabel('military_province_second', '3.1.9. ถ้าใช่  ท่านเคยถูกส่งไปประจำที่จังหวัดใดบ้าง?');
+    hideFieldByLabel('seconddeployment_start_year', '3.1.10. ท่านถูกส่งไปประจำที่จังหวัดนี้ตั้งแต่ปีไหน');
+    hideFieldByLabel('seconddeployment_start_month', '3.1.11. เดือนเริ่มต้น');
+    hideFieldByLabel('seconddeployment_length', '3.1.12. ท่านประจำการอยู่ที่จังหวัดนั้นนานเท่าได (จำนวนเดือน)');
+
+    // Then set up the toggle
+    toggleSecondDeploymentFields();
+</script>
+
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+</body>
+
+{{ endblock }}
+
+{{ block options }}
+<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</html>
+{{ endblock }}

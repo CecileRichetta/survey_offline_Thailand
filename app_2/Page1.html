@@ -1,0 +1,123 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 2/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>ข้อมูลทั่วไป</b>
+    </h3>
+<h5>
+        {{ formfields }}
+</h5>
+
+<script>
+    // Function to find and hide field by label text
+    function hideFieldByLabel(fieldName, labelTextPart) {
+        var labels = document.querySelectorAll('label');
+        for (var i = 0; i < labels.length; i++) {
+            var label = labels[i];
+            if (label.textContent.indexOf(labelTextPart) !== -1) {
+                var parent = label.parentElement;
+                var attempts = 0;
+                while (parent && parent !== document.body && attempts < 10) {
+                    var field = parent.querySelector('input[name="' + fieldName + '"], textarea[name="' + fieldName + '"]');
+                    if (field) {
+                        parent.style.display = 'none';
+                        parent.setAttribute('data-conditional-field', fieldName);
+                        break;
+                    }
+                    parent = parent.parentElement;
+                    attempts++;
+                }
+                if (parent && parent.getAttribute('data-conditional-field')) break;
+            }
+        }
+    }
+
+    // Function to toggle religiosity
+    function toggleReligiosity() {
+        var religionRadios = document.querySelectorAll('input[name="religion"]');
+        var religiosityContainer = document.querySelector('[data-conditional-field="religiosity"]');
+
+        if (!religiosityContainer) {
+            return;
+        }
+
+        // Check initial state
+        var selectedRadio = document.querySelector('input[name="religion"]:checked');
+        if (!selectedRadio || selectedRadio.value === '4' || selectedRadio.value === '999') {
+            religiosityContainer.style.display = 'none';
+        } else {
+            religiosityContainer.style.display = '';
+        }
+
+        // Add event listeners
+        for (var i = 0; i < religionRadios.length; i++) {
+            religionRadios[i].addEventListener('change', function() {
+                if (this.value === '4' || this.value === '999') {
+                    religiosityContainer.style.display = 'none';
+                } else {
+                    religiosityContainer.style.display = '';
+                }
+            });
+        }
+    }
+
+    // First hide the conditional fields and mark them
+    hideFieldByLabel('religiosity', 'ท่านปฏิบัติตามหลักศาสนามากน้อยเพียงใด');
+
+    // Then set up the toggles
+    toggleReligiosity();
+</script>
+
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

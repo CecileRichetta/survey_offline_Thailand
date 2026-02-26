@@ -1,0 +1,130 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        .example-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc; /* Bordure grise */
+            border-radius: 8px; /* Coins arrondis */
+            padding: 15px; /* Espace entre la bordure et le contenu */
+            /* background-color: #f9f9f9; /* Optionnel: fond légèrement grisé */
+            justify-content: center; /* Align horizontal */
+            align-items: center; /* Align vertical */
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .example-image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 5/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>กิจกรรมแรก</b>
+    </h3>
+    <p>
+    {{ if participant.vars.side_ultimatum == 0 }}
+    {{ include C.TEMPLATE_INSTRUCTIONS_ULTIMATUM_PROPOSER }}
+
+</p>
+
+<!-- Example 1 -->
+    <h5>
+<div class="example-container row">
+
+
+    <div class="example-title">ตัวอย่างแรกของกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_UG_EXAMPLE1 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>ตอนเริ่มแรก คนเสื้อน้ำเงินมี 4 เหรียญ เขาตั้งใจจะแบ่ง 2 เหรียญให้กับคนเสื้อส้ม แต่คนเสื้อส้มต้องการอย่างน้อย 3 เหรียญ โดยไม่รู้ล่วงหน้าว่าคนเสื้อน้ำเงินจะให้เขากี่เหรียญ ดังนั้น ทั้งคนเสื้อน้ำเงินและเสื้อส้มจะไม่ได้รับเหรียญเลย แม้ว่าคนเสื้อน้ำเงินจะได้รับ 4 เหรียญในตอนต้น  แต่เนื่องจากคนเสื้อส้มปฏิเสธข้อเสนอของเขา ทำให้คนเสื้อน้ำเงินจะไม่ได้รับเหรียญเลย ส่วนคนเสื้อส้มก็จะไม่ได้รับเหรียญเช่นกัน    </div>
+</div>
+
+        <br>
+<!-- Example 2 -->
+
+<div class="example-container row">
+    <div class="example-title">ตัวอย่างที่สองของกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_UG_EXAMPLE2 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>ตอนเริ่มแรก คนเสื้อน้ำเงินมี 4 เหรียญ เขาตั้งใจจะแบ่งให้กับคนเสื้อส้ม 1 เหรียญ ส่วนคนเสื้อส้มก็ต้องการอย่างน้อย 1 เหรียญ ดังนั้น  คนเสื้อน้ำเงินจึงได้รับ 3 เหรียญ (จากเดิมที่มีอยู่ 4 เหรียญ ถูกหักไป 1 เหรียญซึ่งเป็นจำนวนที่เสนอมอบให้กับคู่ของเขา) และคนเสื้อส้มก็ได้รับเหรียญ 1 เหรียญตามที่เสนอ    </div>
+</div>
+    </h5>
+{{ elif participant.vars.side_ultimatum == 1 }}
+    {{ include C.TEMPLATE_INSTRUCTIONS_ULTIMATUM_RESPONDER }}
+
+<!-- Example 1 -->
+    <h5>
+<div class="example-container row">
+
+
+    <div class="example-title">ตัวอย่างแรกของกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_UG_EXAMPLE1 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>ตอนเริ่มแรก คนเสื้อน้ำเงินมี 4 เหรียญ เขาตั้งใจจะแบ่ง 2 เหรียญให้กับคนเสื้อส้ม แต่คนเสื้อส้มต้องการอย่างน้อย 3 เหรียญ โดยไม่รู้ล่วงหน้าว่าคนเสื้อน้ำเงินจะให้เขากี่เหรียญ ดังนั้น ทั้งคนเสื้อน้ำเงินและเสื้อส้มจะไม่ได้รับเหรียญเลย แม้ว่าคนเสื้อน้ำเงินจะได้รับ 4 เหรียญในตอนต้น  แต่เนื่องจากคนเสื้อส้มปฏิเสธข้อเสนอของเขา ทำให้คนเสื้อน้ำเงินจะไม่ได้รับเหรียญเลย ส่วนคนเสื้อส้มก็จะไม่ได้รับเหรียญเช่นกัน    </div>
+</div>
+
+        <br>
+<!-- Example 2 -->
+
+<div class="example-container row">
+    <div class="example-title">ตัวอย่างที่สองของกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_UG_EXAMPLE2 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>ตอนเริ่มแรก คนเสื้อน้ำเงินมี 4 เหรียญ เขาตั้งใจจะแบ่งให้กับคนเสื้อส้ม 1 เหรียญ ส่วนคนเสื้อส้มก็ต้องการอย่างน้อย 1 เหรียญ ดังนั้น  คนเสื้อน้ำเงินจึงได้รับ 3 เหรียญ (จากเดิมที่มีอยู่ 4 เหรียญ ถูกหักไป 1 เหรียญซึ่งเป็นจำนวนที่เสนอมอบให้กับคู่ของเขา) และคนเสื้อส้มก็ได้รับเหรียญ 1 เหรียญตามที่เสนอ    </div>
+</div>
+    </h5>
+{{ endif }}
+
+<p> <h5>
+    <b>โปรดระบุว่าข้อความต่อไปนี้เป็นเรื่องจริงหรือเท็จ</b>
+    {{ if participant.vars.side_ultimatum == 0 }}
+        {{ formfield 'ug_proposer_cc1' }}
+        {{ formfield 'ug_proposer_cc2' }}
+        {{ formfield 'ug_proposer_cc3' }}
+    {{ elif participant.vars.side_ultimatum == 1 }}
+        {{ formfield 'ug_responder_cc1' }}
+        {{ formfield 'ug_responder_cc2' }}
+        {{ formfield 'ug_responder_cc3' }}
+    {{ endif }}
+        </h5>
+</p>
+<p class="text-center">
+    <button class="btn btn-primary">หน้าถัดไป</button>
+</p>
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

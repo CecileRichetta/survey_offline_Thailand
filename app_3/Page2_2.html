@@ -1,0 +1,153 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+            .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        }
+    </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 3/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>ข้อมูลทั่วไป</b>
+    </h3>
+    <body>
+<h5>
+
+    {{ formfields }}
+
+<script>
+    // Polyfill for closest() for older browsers
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(s) {
+            var el = this;
+            do {
+                if (el.matches && el.matches(s)) return el;
+                el = el.parentElement || el.parentNode;
+            } while (el !== null && el.nodeType === 1);
+            return null;
+        };
+    }
+
+    // Polyfill for matches() for older browsers
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+
+    // Function to find and hide field by label text
+    function hideFieldByLabel(fieldName, labelTextPart) {
+        var labels = document.querySelectorAll('label');
+        for (var i = 0; i < labels.length; i++) {
+            var label = labels[i];
+            if (label.textContent.indexOf(labelTextPart) !== -1) {
+                var container = label.closest('div, tr, p');
+                if (!container) container = label.parentElement;
+                var attempts = 0;
+                while (container && container !== document.body && attempts < 10) {
+                    var field = container.querySelector('input[name="' + fieldName + '"], select[name="' + fieldName + '"]');
+                    if (field) {
+                        container.style.display = 'none';
+                        container.setAttribute('data-conditional-field', fieldName);
+                        break;
+                    }
+                    container = container.parentElement;
+                    attempts++;
+                }
+                if (container && container.getAttribute('data-conditional-field')) break;
+            }
+        }
+    }
+
+    // Function to toggle second deployment fields
+    function toggleSecondDeploymentFields() {
+        var deploymentRadios = document.querySelectorAll('input[name="noncombatant_geography_second_b"]');
+        var provinceContainer = document.querySelector('[data-conditional-field="noncombatant_geography_second"]');
+        var startyearContainer = document.querySelector('[data-conditional-field="noncombatant_geography_second_start_year"]');
+        var startmonthContainer = document.querySelector('[data-conditional-field="noncombatant_geography_second_start_month"]');
+        var endyearContainer = document.querySelector('[data-conditional-field="noncombatant_geography_second_end_year"]');
+        var endmonthContainer = document.querySelector('[data-conditional-field="noncombatant_geography_second_end_month"]');
+
+        if (!provinceContainer || !startyearContainer || !startmonthContainer || !endyearContainer || !endmonthContainer) {
+            return;
+        }
+
+        // Check initial state - only show if noncombatant_geography_second_b == 1
+        var selectedRadio = document.querySelector('input[name="noncombatant_geography_second_b"]:checked');
+        if (selectedRadio && selectedRadio.value === '1') {
+            provinceContainer.style.display = '';
+            startyearContainer.style.display = '';
+            startmonthContainer.style.display = '';
+            endyearContainer.style.display = '';
+            endmonthContainer.style.display = '';
+        } else {
+            // Hide for any other value (0, 999, or no selection)
+            provinceContainer.style.display = 'none';
+            startyearContainer.style.display = 'none';
+            startmonthContainer.style.display = 'none';
+            endyearContainer.style.display = 'none';
+            endmonthContainer.style.display = 'none';
+        }
+
+        // Add event listeners
+        for (var i = 0; i < deploymentRadios.length; i++) {
+            deploymentRadios[i].addEventListener('change', function() {
+                if (this.value === '1') {
+                    // Show only when value is exactly '1'
+                    provinceContainer.style.display = '';
+                    startyearContainer.style.display = '';
+                    startmonthContainer.style.display = '';
+                    endyearContainer.style.display = '';
+                    endmonthContainer.style.display = '';
+                } else {
+                    // Hide for any other value (0, 999, etc.)
+                    provinceContainer.style.display = 'none';
+                    startyearContainer.style.display = 'none';
+                    startmonthContainer.style.display = 'none';
+                    endyearContainer.style.display = 'none';
+                    endmonthContainer.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    // First hide the conditional fields by label and mark them (hidden by default)
+    hideFieldByLabel('noncombatant_geography_second', '3.2.7. ถ้าใช่  ท่านไปอาศัยอยู่ที่จังหวัดใด');
+    hideFieldByLabel('noncombatant_geography_second_start_year', '3.2.8. ท่านอาศัยอยู่ในจังหวัดนั้นในปีไหน');
+    hideFieldByLabel('noncombatant_geography_second_start_month', '3.2.9. เริ่มในเดือน');
+    hideFieldByLabel('noncombatant_geography_second_end_year', '3.2.10. ถึงปีไหน');
+    hideFieldByLabel('noncombatant_geography_second_end_month', '3.2.11. สิ้นสุดในเดือน');
+
+    // Then set up the toggle
+    toggleSecondDeploymentFields();
+
+</script>
+
+        </h5>
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+</body>
+
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}

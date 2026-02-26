@@ -1,0 +1,61 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+    </style>
+
+
+</head>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 2/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b>ข้อมูลทั่วไป</b>
+    </h3>
+<h5>
+     {{ if participant.vars.group == 0 }}
+        {{ formfield 'group_attachment_1' label="2.15.1. ท่านเห็นด้วยกับประโยคต่อไปนี้มากน้อยเพียงใด: ฉันรู้สึกผูกพันอย่างมากกับคนเชื้อสายมลายูที่อาศัยอยู่ในภาคใต้ตอนล่าง" }}
+        {{ formfield 'group_attachment_2' label="2.16.1. ท่านเห็นด้วยกับประโยคต่อไปนี้มากน้อยเพียงใด: ฉันมักคิดว่าตัวเองเป็นคนเชื้อสายมลายูจากภาคใต้ตอนล่าง" }}
+        {{ formfield 'venn_1' label="2.17.1. ภาพใดที่อธิบายความสัมพันธ์ของคุณกับผู้คนเชื้อสายมาเลย์จากภาคใต้ตอนล่างได้ดีที่สุด? ด้านล่าง 'อื่นๆ' หมายถึงผู้คนเชื้อสายมาเลย์จากภาคใต้ตอนล่าง" }}
+   {{ elif participant.vars.group == 1 }}
+        {{ formfield 'group_attachment_1' label="2.15.2. ท่านเห็นด้วยกับประโยคต่อไปนี้มากน้อยเพียงใด: ฉันรู้สึกผูกพันอย่างมากกับคนเชื้อสายไทย" }}
+        {{ formfield 'group_attachment_2' label="2.16.2. ท่านเห็นด้วยกับประโยคต่อไปนี้มากน้อยเพียงใด: ฉันมักคิดว่าตัวเองเป็นคนเชื้อสายไทย" }}
+        {{ formfield 'venn_1' label="2.17.2. ภาพใดที่อธิบายความสัมพันธ์ของคุณกับคนเชื้อสายไทยได้ดีที่สุด? ด้านล่าง 'อื่นๆ' หมายถึงคนเชื้อสายไทย" }}
+    {{ endif }}
+
+<img src="{{ static C.VENN_THAILAND }}" class="venn-diagram" alt="Venn diagram">
+
+
+</h5>
+
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+
+{{ endblock }}
+
+{{ block options }}
+<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</html>
+{{ endblock }}

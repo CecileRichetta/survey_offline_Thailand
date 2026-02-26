@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ยินดีต้อนรับ</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>ยินดีต้อนรับ</h2>
+        <form>
+            <button type="submit">เริ่มต้นแบบสำรวจ</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            urlParams.set('welcome_page_ok', '1');
+            window.location.href = window.location.pathname + '?' + urlParams.toString();
+        });
+    </script>
+</body>
+</html>

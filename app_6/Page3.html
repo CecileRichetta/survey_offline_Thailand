@@ -1,0 +1,97 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <style>
+        .progress-text {
+            text-align: right;
+            color: grey;
+            font-size: 11px;
+            width: 100%; /* Ensures the text spans the full width of its container */
+        }
+        .example-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc; /* Bordure grise */
+            border-radius: 8px; /* Coins arrondis */
+            padding: 15px; /* Espace entre la bordure et le contenu */
+            /* background-color: #f9f9f9; /* Optionnel: fond légèrement grisé */
+            justify-content: center; /* Align horizontal */
+            align-items: center; /* Align vertical */
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .example-image {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+{{ endblock }}
+{{ block title }}
+        <p class="progress-text" >
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 6/10
+        </p>
+{{ endblock }}
+
+{{ block content }}
+    <h3 class="mb-4 text-center text-primary">
+        <b> กิจกรรมที่สอง</b>
+    </h3>
+    <h5>
+    <p>
+    {{ include C.TEMPLATE_INSTRUCTIONS_PG }}
+    </p>
+
+    <!-- Example 1 -->
+<div class="example-container row">
+    <div class="example-title">
+        ตัวอย่างแรกของกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_PG_EXAMPLE1 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>
+            <h5>
+        ในตัวอย่างแรกนี้ ทั้งคนเสื้อเขียวและคนเสื้อม่วงมีเหรียญคนละ 4 เหรียญ คนเสื้อเขียวตัดสินใจว่าจะเก็บเหรียญไว้ทั้งหมดและไม่หยอดกระปุกกลางเลย คนเสื้อม่วงตัดสินใจหยอดกระปุกกลาง 2 เหรียญทำให้ในกระปุกกลางมีอยู่ 2 เหรียญ
+        นักวิจัย (คนเสื้อเทา) จะเติมเหรียญเข้าไปครึ่งหนึ่งของจำนวนเหรียญในกระปุก  โดยจะใส่เข้าไป 1 เหรียญ ทำให้ในกระปุกกลางตอนนี้มี 3 เหรียญ และจะมีการแบ่งให้คนเสื้อเขียวและคนเสื้อม่วงเท่า ๆ กัน โดยแต่ละคนจะได้รับ 1.5 เหรียญ
+        ท้ายที่สุด คนเสื้อเขียวจะมี 5.5 เหรียญและคนเสื้อม่วงจะมี 3.5 เหรียญ
+    </h5>
+</p>
+    </div>
+</div>
+<br>
+<!-- Example 2 -->
+
+<div class="example-container row">
+    <div class="example-title">ตัวอย่างที่สองสำหรับกิจกรรมนี้:</div>
+    <div class="col-md-4">
+        <img src="{{ static C.IMAGE_PG_EXAMPLE2 }}" class="img-fluid example-image">
+    </div>
+    <div class="col-md-4">
+        <p>ในตัวอย่างที่สอง ทั้งคนเสื้อเขียวและคนเสื้อม่วงเริ่มจากการมีคนละ 4 เหรียญเช่นกัน ทั้งสองคนตัดสินใจว่าจะนำเหรียญของตนทั้งหมดไปหยอดกระปุกกลางทำให้ในกระปุกกลางมีอยู่ 8 เหรียญ
+            นักวิจัยจะใส่เหรียญเข้าไปเท่ากับครึ่งหนึ่งของจำนวนเหรียญในกระปุกคือ 4 เหรียญ ทำให้ในกระปุกจะมีเหรียญทั้งสิ้น 12 เหรียญและจะมีการแบ่งเหรียญให้เท่าๆ กันระหว่างคนเสื้อเขียวและคนเสื้อม่วง ทำให้แต่ละคนจะได้รับ 6 เหรียญ
+            ท้ายที่สุด ทั้งสองคนจะมีเหรียญคนละ 6 เหรียญ  </p>
+    </div>
+</div>
+            {{ formfields }}
+
+    </p>
+    </h5>
+    <p class="text-center">
+        <button class="btn btn-primary">
+            หน้าถัดไป
+        </button>
+    </p>
+{{ endblock }}
+
+{{ block options }}
+</html>
+{{ endblock }}
