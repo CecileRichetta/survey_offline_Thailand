@@ -9,6 +9,29 @@ doc = """
 Support for peace agreement provisions. 
 """
 
+def treatment_other_check_g0_choices(player):
+    import random
+    shuffled = [
+        (0, 'บุคคลผู้นี้เป็นคนเชื้อสายมลายูที่เคยอาศัยอยู่ในภาคใต้ตอนล่าง'),
+        (1, 'บุคคลนั้นเป็นคนเชื้อสายไทย'),
+    ]
+    fixed = [(998, 'ไม่ทราบ'), (999, 'ขอไม่ตอบ')]
+    random.shuffle(shuffled)
+    return shuffled + fixed
+
+def treatment_other_check_g3_choices(player):
+    import random
+    shuffled = [(0, 'ฝ่ายขบวนการ'), (1, 'กองทัพ')]
+    fixed = [(998, 'ไม่ทราบ'), (999, 'ขอไม่ตอบ')]
+    random.shuffle(shuffled)
+    return shuffled + fixed
+
+def treatment_other_check_g4_choices(player):
+    import random
+    shuffled = [(0, 'ฝ่ายขบวนการ'), (1, 'กองทัพ')]
+    fixed = [(998, 'ไม่ทราบ'), (999, 'ขอไม่ตอบ')]
+    random.shuffle(shuffled)
+    return shuffled + fixed
 
 class C(BaseConstants):
     NAME_IN_URL = 'app_9'
@@ -27,8 +50,8 @@ class C(BaseConstants):
     ]
     CHOICE_NGO_NAME = [
         (0, "สภาประชาสังคมชายแดนใต้ เครือข่ายองค์กรประชาสังคม 45 กลุ่มที่มีความหลากหลายทางชาติพันธุ์และศาสนาซึ่งทำงานเพื่อส่งเสริมการแก้ปัญหาความขัดแย้งในชายแดนใต้ด้วยสันติวิธี"),
-        (1, "สมาคมด้วยใจเพื่อการช่วยเหลือด้านมนุษยธรรม  กลุ่มประชาสังคมที่ขับเคลื่อนโดยผู้หญิงชาวมุสลิมซึ่งทำงานด้านมนุษยธรรมและสิทธิมนุษยชน โดยเน้นหนักไปที่พื้นที่จังหวัดชายแดนภาคใต้"),
-        (2, "เครือข่ายชาวพุทธเพื่อสันติภาพ   กลุ่มประชาสังคมที่ทำงานกับชุมชนชาวพุทธในจังหวัดชายแดนเภาคใต้เพื่อหนุนเสริมกระบวนการสันติภาพและส่งเสริมการอยู่ร่วมกันในสังคมที่มีความแตกต่างหลากหลาย"),
+        (1, "สมาคมด้วยใจเพื่อการช่วยเหลือด้านมนุษยธรรม กลุ่มประชาสังคมที่ขับเคลื่อนโดยผู้หญิงชาวมุสลิมซึ่งทำงานด้านมนุษยธรรมและสิทธิมนุษยชน โดยเน้นหนักไปที่พื้นที่จังหวัดชายแดนภาคใต้"),
+        (2, "เครือข่ายชาวพุทธเพื่อสันติภาพ กลุ่มประชาสังคมที่ทำงานกับชุมชนชาวพุทธในจังหวัดชายแดนเภาคใต้เพื่อหนุนเสริมกระบวนการสันติภาพและส่งเสริมการอยู่ร่วมกันในสังคมที่มีความแตกต่างหลากหลาย"),
         (997, "ไม่เกี่ยวข้อง")
     ]
     HOPE_SCALE = [
@@ -40,12 +63,7 @@ class C(BaseConstants):
         (998, "ไม่ทราบ"), # Don't know
         (999, "ขอไม่ตอบ") # Prefer not to say
     ]
-    OTHER_GROUP = [
-        (0, 'กลุ่มกบฏ/ขบวนการ'),
-        (1, 'กองทัพแห่งชาติ'),
-        (998, 'ไม่ทราบ'),
-        (999, 'ขอไม่ตอบ')
-    ]
+
 
 
 class Subsession(BaseSubsession):
@@ -146,15 +164,18 @@ class Player(BasePlayer):
         blank=False,
         widget=widgets.RadioSelect
     )
+    treatment_other_check_g0 = models.IntegerField(
+        label="9.14.3. ระหว่างการทำกิจกรรมในแบบสำรวจรอบนี้และรอบที่แล้ว ท่านได้มีปฏิสัมพันธ์กับคู่สนทนาท่านหนึ่ง  ท่านคิดว่าคู่สนทนาของท่านเป็นใคร:",
+        blank=False,
+        widget=widgets.RadioSelect
+    )
     treatment_other_check_g3 = models.IntegerField(
-        label="9.14.1. ในระหว่างกิจกรรม ท่านได้เล่นคู่กับคนเชื้อสายมลายูที่เคยอาศัยอยู่ในภาคใต้ตอนล่างและเป็นอดีตนักรบ ไม่ว่าจะเป็นฝ่ายกองทัพหรือฝ่ายขบวนการ ท่านคาดเดาได้หรือไม่ว่าคู่ของท่านเป็นนักรบฝ่ายไหน?",
-        choices=C.OTHER_GROUP,
+        label="9.14.1. ในระหว่างกิจกรรม ท่านได้จับคู่กับบุคคลเชื้อสายมลายูที่เคยอาศัยอยู่ในภาคใต้ตอนล่างและเป็นอดีตทหาร  ท่านคาดเดาได้หรือไม่ว่าคู่ของท่านสังกัดฝ่ายใด?",
         blank=False,
         widget=widgets.RadioSelect
     )
     treatment_other_check_g4 = models.IntegerField(
-        label="9.14.2. ในระหว่างกิจกรรม ท่านได้เล่นกับคู่ที่เป็นคนเชื้อสายไทยและเป็นอดีตนักรบ ไม่ว่าจะเป็นฝ่ายกองทัพหรือฝ่ายขบวนการ ท่านคาดเดาได้หรือไม่ว่าคู่ ของท่านเป็นนักรบฝ่ายไหน?",
-        choices=C.OTHER_GROUP,
+        label="9.14.2. ในระหว่างกิจกรรม  ท่านได้เล่นกับคู่ของท่านที่เป็นคนเชื้อสายไทยและเป็นอดีตทหาร ท่านคาดเดาได้หรือไม่ว่าคู่ของท่านคุณอยู่ฝ่ายใด?",
         blank=False,
         widget=widgets.RadioSelect
     )
@@ -267,18 +288,27 @@ class Page3(Page):
     def get_form_fields(player: Player):
         """Only return form fields if the page is displayed"""
         participant = player.participant
-        if participant.treatment_other == 3:
-            return [
-                'hope_check',
-                'treatment_other_check_g3'
-            ]
-        elif participant.treatment_other == 4:
-            return [
-                'hope_check',
-                'treatment_other_check_g4'
-            ]
-        else:
+        if player.session.config['name'] == "session_C4P_THAI_w1":
             return ['hope_check']
+        else:
+            if participant.treatment_other == 0:
+                return [
+                    'hope_check',
+                    'treatment_other_check_g0'
+                ]
+            elif participant.treatment_other == 3:
+                return [
+                    'hope_check',
+                    'treatment_other_check_g3'
+                ]
+            elif participant.treatment_other == 4:
+                return [
+                    'hope_check',
+                    'treatment_other_check_g4'
+                ]
+            else:
+                return ['hope_check']
+
 
 
 page_sequence = [

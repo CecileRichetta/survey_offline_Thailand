@@ -113,14 +113,6 @@ class C(BaseConstants):
         (999, 'ขอไม่ตอบ') # Prefer not to say
     ]
 
-    BINARY_ANSWER_NA = [
-        (1, 'ใช่'),  # Yes
-        (0, 'ไม่ใช่'), # No
-        (997, 'ไม่เกี่ยวข้อง'), # Not applicable
-        (999, 'ขอไม่ตอบ') # Prefer not to say
-    ]
-
-
 
 class Subsession(BaseSubsession):
     pass
@@ -213,14 +205,14 @@ class Player(BasePlayer):
     language_2_situation_homefamily = models.IntegerField(
         label="2.13. จากข้อ 2.12  ท่านพูดภาษานั้นเมื่ออยู่ในบ้าน ",
         # From 2.12 you speak this language at home
-        choices=C.BINARY_ANSWER_NA,
+        choices=C.BINARY_ANSWER,
         widget=widgets.RadioSelectHorizontal,
         blank=True
     )
     language_2_situation_outside = models.IntegerField(
         label="2.14. จากข้อ 2.12  ท่านพูดภาษานั้นเมื่ออยู่นอกบ้าน ",
         # From 2.12 you speak this language outside of home
-        choices=C.BINARY_ANSWER_NA,
+        choices=C.BINARY_ANSWER,
         widget=widgets.RadioSelectHorizontal,
         blank=True
     )

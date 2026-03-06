@@ -61,14 +61,7 @@ def extract_participant_w1(p):
 # PAGES
 class Page0(Page):
     pass
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        participant = player.participant
-        if player.session.config['name'] == "session_C4P_THAI_w2":
-            participant.military_binary = 997
-            extract_participant_w1(player)
-        else:
-            pass
+
 
 class Page1(Page):
     form_model = 'player'
@@ -86,6 +79,11 @@ class Page2(Page):
         participant.vars['consent'] = player.consent
         participant.dropout = not player.consent
         player.p_label = participant.label
+        if player.session.config['name'] == "session_C4P_THAI_w2":
+            participant.military_binary = 997
+            extract_participant_w1(player)
+        else:
+            pass
 
     def app_after_this_page(player: Player, upcoming_apps):
         if not player.consent:
@@ -96,7 +94,7 @@ class Page2(Page):
             return upcoming_apps[-1]
 
 page_sequence = [
-    Page0, # welcome + extract info wave 1
+#    Page0, # welcome + extract info wave 1
 #    Page1, # enumerator identifier
     Page2 # consent form
 ]

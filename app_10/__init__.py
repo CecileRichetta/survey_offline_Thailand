@@ -57,7 +57,10 @@ class Page1_1(Page):
 
 
 class Page1_2(Page):
-    pass
+    @staticmethod
+    def is_displayed(player):
+        participant = player.participant
+        return not participant.dropout
 
 class Page2(Page):
     pass

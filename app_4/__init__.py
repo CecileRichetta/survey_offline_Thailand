@@ -34,7 +34,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     hope_recall = models.IntegerField(
-        label="4.1.ท่านเคยรู้สึกมีความหวังบ้างหรือไม่ว่ากระบวนการสันติภาพในจังหวัดชายแดนภาคใต้จะประสบความสำเร็จได้   กรุณาใช้เวลาสักครู่เพื่อทบทวนเรื่องนี้",
+        label="4.1.ท่านเคยรู้สึกมีความหวังบ้างหรือไม่ว่ากระบวนการสันติภาพในจังหวัดชายแดนภาคใต้จะประสบความสำเร็จได้ กรุณาใช้เวลาสักครู่เพื่อทบทวนเรื่องนี้",
         # Can you recall a moment in time that made you feel hopeful that the peace process in southern Thailand is achievable? Please take some time to think about it.
         choices=C.BINARY_ANSWER,
         widget=widgets.RadioSelect,
