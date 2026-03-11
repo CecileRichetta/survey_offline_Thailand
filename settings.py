@@ -6,21 +6,18 @@ ROOMS = [
     dict(
         name="C4PTHP",
         display_name="C4PTHP",
-        welcome_page="_welcome_pages/Page0.html",
         participant_label_file="_rooms/participant_label_thai_inc.txt",
         use_secure_urls=False
     ),
     dict(
         name="C4PTHP_TRAINING_1",
         display_name="C4PTHP_TRAINING_1",
-        welcome_page="_welcome_pages/Page0.html",
         participant_label_file="_rooms/participant_label_thai_inc.txt",
         use_secure_urls=False
     ),
     dict(
-        name="C4PTHP_TRAINING_2",
-        display_name="C4PTHP_TRAINING_2",
-        welcome_page="_welcome_pages/Page0.html",
+        name="C4PTHP_BACKUP",
+        display_name="C4PTHP_BACKUP",
         participant_label_file="_rooms/participant_label_thai_inc.txt",
         use_secure_urls=False
     ),
