@@ -1,0 +1,103 @@
+{{ block scripts }}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
+
+        <style>
+            .progress-text {
+                text-align: right;
+                color: grey;
+                font-size: 11px;
+                width: 100%;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                color: #333;
+                background-color: white;
+            }
+            h1 {
+                text-align: center;
+                color: #2c3e50;
+            }
+            h2 {
+                color: #2980b9;
+            }
+            p {
+                margin: 10px 0;
+                text-align: justify;
+            }
+            .report-container {
+                background-color: #F0F0F0;
+                border-radius: 8px;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+        </style>
+{{ endblock }}
+
+{{ block title }}
+        <p class="progress-text">
+            ความก้าวหน้าของแบบสอบถาม: ส่วนที่ 4/10
+        </p>
+{{ endblock }}
+
+
+{{ block content }}
+    <body>
+        <p>
+            <h5>
+                        กรุณาอ่านบทสรุปจากรายงานของคณะมนตรีสิทธิมนุษยชนแห่งสหประชาชาติอย่างละเอียด
+        </h5>
+
+            <br><br>
+        </p>
+
+        <div class="report-container">
+            <h1>โอกาสแห่งสันติภาพและการปรองดองในประเทศไทย</h1><br>
+<h5>
+        <p>
+            ทีมวิจัยนานาชาติซึ่งประกอบด้วยนักวิจัยและผู้เชี่ยวชาญด้านความขัดแย้งรุนแรงได้พิจารณาแนวโน้มสถานการณ์รูปแบบต่างๆ เกี่ยวกับอนาคตของความขัดแย้งในภาคใต้ของไทย
+            พวกเขาได้สรุปว่าความพยายามในการสร้างความปรองดองที่เกิดขึ้นในประเทศไทยได้สร้างผลกระทบสำคัญต่อการเยียวยาสังคมในพื้นที่ ในประเทศโคลอมเบีย
+            ความพยายามในการสร้างความปรองดองได้ช่วยฟื้นฟูความไว้วางใจระหว่างประชาชนและเสริมสร้างความกลมเกลียวสังคมในหลายๆ ส่วนของประเทศ แม้ว่ากลุ่มติดอาวุธบางกลุ่มยังคงเคลื่อนไหวอยู่ก็ตาม
+            ดังนั้น พวกเขาจึงมองโลกในแง่ดีว่าความขัดแย้งรุนแรงในภาคใต้ของไทยจะสามารถแก้ไขได้อย่างสันติ
+        </p>
+    </h5>
+    </div>
+</body>
+    <p>
+        <br><br>
+        <h5>
+          {{ formfields }}
+    </h5>
+
+    </p>
+
+
+        <p class="text-center">
+            <button class="btn btn-primary">
+                หน้าถัดไป
+            </button>
+        </p>
+    </body>
+    {{ endblock }}
+
+        {{ block options }}
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+</html>
+{{ endblock }}
+
+
