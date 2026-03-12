@@ -33,7 +33,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     text_check = models.IntegerField(
-        label="4.1. นักวิจัยได้ข้อสรุปเกี่ยวกับโอกาสของความสำเร็จในการสร้างความปรองดองในภาคใต้แล้วใช่หรือไม่?",
+        label="4.1. จากข้อความข้างต้น นักวิจัยได้ข้อสรุปเกี่ยวกับโอกาสของความสำเร็จในการสร้างความปรองดองในภาคใต้แล้วใช่หรือไม่?",
         # Have the researchers already reached a conclusion about the chances of success of reconciliation in the Deep South?
         choices=C.BINARY_ANSWER,
         widget=widgets.RadioSelect,
